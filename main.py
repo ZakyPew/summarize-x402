@@ -20,7 +20,7 @@ app = FastAPI(title="SummarizeAI x402", description="Content summarization micro
 
 # x402 Configuration
 RECEIVER_WALLET = "0xcAa16ffB50cb7f17690286ED4a19224AF7dC199B"  # Your ETH address
-PRICE_PER_REQUEST = 100000000000000000  # 0.1 ETH in wei (adjust as needed)
+PRICE_PER_REQUEST = 33333333333333  # ~$0.10 USD at $3,000 ETH (0.000033 ETH in wei)
 
 # Simple in-memory payment tracking (use Redis/DB in production)
 payments_db = {}
@@ -159,7 +159,7 @@ async def root():
         "payment": {
             "type": "x402",
             "receiver": RECEIVER_WALLET,
-            "amount_per_request": "0.1 ETH",
+            "amount_per_request": "$0.10 USD (0.000033 ETH)",
             "network": "base"
         }
     }
@@ -172,7 +172,7 @@ async def health():
 async def pricing():
     return {
         "endpoint": "/summarize",
-        "price": "0.1 ETH",
+        "price": "$0.10 USD (0.000033 ETH)",
         "price_wei": PRICE_PER_REQUEST,
         "currency": "ETH",
         "network": "base",
